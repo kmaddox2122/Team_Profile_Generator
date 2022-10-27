@@ -1,64 +1,111 @@
-/* PSEUDOCODE
-Write out HTML and CSS for webpage
-    Jumbotron with red background, text that reads "my team".
-    Cards that appear and populate with user inputted text -- page template.js??
-    Emails for each member will need to be a link to email that person
-    Github profile username will need to be a link to a new tab
 
-Will need to connect index.js with team.html and style.css
-
-index.js
-    "require" files to be used in app
-    function to start application
-    prompts to enter team manager's name, emp ID, email, and office number
-        // If the user does not enter anything, return an error message
-            if (!userInput) {
-            console.error('');
-            process.exit();
-            }   --- ref lesson 10.8
-    Then goes to a menu to prompt to add a team member
-        Has options for:
-            Engineer
-                name, emp ID, email, Github username
-            Intern
-                name, emp ID, email, school
-            Finish building team
-                HTML is generated
-
-(reference 10.1 for properties definition and 10.2 for methods definition. Subclasses in 10.23)
-
-Employee.js
-    parent class
-    properties : name, id, email
-    methods : getName, getID, getEmail, getRole --returns Employee
-
-Manager.js
-    Subclass of Employee
-    additional property: officeNumber
-    methods : getRole -- returns Manager
-
-Engineer.js
-    Subclass of Employee
-    additional property: github username
-    methods : getGithub, getRole -- returns Engineer
-
-Intern.js
-    Subclass of Employee
-    additional property: school
-    methods : getSchool, getRole -- returns Intern
-
-add validation to ensure user input is in correct format
-
-
-
-Testing
-    Create 4 testing files - one for each team member
-    "require" corresponding js file from "lib"
-    
-*/
-
+//Declare variables
 const Employee = require("./Assets/lib/Employee");
 const Engineer = require("./Assets/lib/Engineer");
 const Intern = require("./Assets/lib/Intern");
 const Manager = require("./Assets/lib/Manager");
+const inquirer = require("inquirer");
+const path = require('node:path');
+const fs = require('fs');
 
+const generateHtml = require('./Assets/src/page-template.js');
+
+//prompted questions
+//Manager questions
+const questions = [
+    {
+      type: 'input',
+      name: 'managerName',
+      message: "What is your team manager's name?",
+    },
+    {
+      type: 'input',
+      name: 'managerID',
+      message: 'What is his/her employee ID?',
+    },
+    {
+      type: 'input',
+      name: 'managerEmail',
+      message: 'What is his/her email?',
+    },
+    {
+      type: 'input',
+      name: 'managerNumber',
+      message: 'What is his/her office number?',
+    },
+    {
+        type: 'list',
+        name: 'addMember',
+        message: 'Would you like to add a team member?',
+        choices: ['Yes, add Engineer', 'Yes, add Intern', 'No, finish']
+    },
+    //add function to terminate prompts if 'no, finish' is chosen.
+    //add function to jump to either engineer or intern prompts respectively 
+    //Engineer questions
+    {
+        type: 'input',
+        name: 'engineerName',
+        message: 'What is his/her name?',
+    },
+    {
+        type: 'input',
+        name: 'engineerID',
+        message: 'What is his/her employee ID?',
+      },
+    {
+        type: 'input',
+        name: 'engineerEmail',
+        message: 'What is his/her email?',
+    },
+    {
+        type: 'input',
+        name: 'engineerUsername',
+        message: 'What is his/her GitHub username.',
+    },
+    //Intern questions
+    {
+      type: 'list',
+      name: 'addMember',
+      message: 'Would you like to add a team member?',
+      choices: ['Yes, add Engineer', 'Yes, add Intern', 'No, finish']
+    },
+    {
+        type: 'input',
+        name: 'InternName',
+        message: 'What is his/her name?',
+    },
+    {
+        type: 'input',
+        name: 'InternID',
+        message: 'What is his/her employee ID?',
+      },
+    {
+        type: 'input',
+        name: 'InternEmail',
+        message: 'What is his/her email?',
+    },
+    {
+        type: 'input',
+        name: 'InternSchool',
+        message: 'What is his/her Alma Mater.',
+    },
+];
+
+// function to initialize app
+function init() {
+    inquirer.prompt(questions) 
+    
+    //send answers to page-template.js file
+   .then((answers) => {
+    const htmlPageContent = generateHtml(answers);
+    console.log("This  is my result " + htmlPageContent);
+    JSON.stringify(htmlPageContent);
+    // Create a function to write file
+    fs.writeFile('team.html', htmlPageContent, (err) =>
+      err ? console.log(err) : console.log('Successfully created team profile!')
+    ) 
+   })
+  };
+
+  // Function call to initialize app
+  init();
