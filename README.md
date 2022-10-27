@@ -1,37 +1,35 @@
 # Team_Profile_Generator
-Module 10 Challenge
-# README_Template
 
 ## Description
 
-This is a professional README template designed for the coder who wants to spend more time coding and less time writing. 
-
-- It can be cumbersome to write out an explanation of your project after hours of tedious work building it. This template is provided to aid in that area.
-- My hope is that this project will aid other coders and allow them to spend more time coding and less time writing.
-- I feel more confident in implementing functions, and I have a better understanding of the benefits of using multiple files.
+This is a project that will allow a user to generate a team profile using the terminal command line. 
 
 ## Installation
 
 1. Open VS Code Terminal
-2. Enter `npm i inquirer@8.2.4` into the command line
+2. Enter `npm i` OR `npm i inquirer@8.2.4` into the command line
 
 
 ## Usage
 
-1. Open "README_TEMPLATE" in Visual Studio Code
+1. Open "TEAM_PROFILE_GENERATOR" in Visual Studio Code
 2. Open Integrated Terminal
 3. Install Inquirer (refer to steps above)
 4. Type "node index.js" into the command line
-5. Answer the prompted questions how you would like them to be displayed in your README file. ie. Use complete sentences and capital letters where applicable.
-6. Open the "README_temp_completed.md file to view your creation!
+5. Answer the prompted questions to complete your team
+6. Open the ""team.html" file to view your creation!
 
 Please see the video below for an example of how this project works:
 
-
+https://www.awesomescreenshot.com/video/12037056?key=322218eb50bf38eda06ef1f6b0a36c9c
 
 Here is an example of the Team Profile to be created after your input:
 
-![Screenshot]()
+![Screenshot](Assets/Screenshot.png)
+
+## Ideas for future development
+
+With more time, I plan to futher develop and polish this project. My plans are detailed in the pseudocode.md file.
 
 ## Credits
 
